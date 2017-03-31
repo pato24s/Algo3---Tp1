@@ -183,68 +183,50 @@ int backtracking (vector<tupNumero> arr, int n,vector<int> &optimoR, vector<int>
 	return bt_recur(arr,n,i,v,optimoR,optimoA);
 }
 
-int bt_recur_acot(vector<int> arr,int n, int i, bool rojoUsado,int ultimoRojo, bool azulUsado,int ultimoAzul, int &res, bool &termino){
-	int valor= arr[i];
-	// int res=n;
+int bt_recur_acot(vector<int> arr,int n, int i, bool rojoUsado,int ultimoRojo, bool azulUsado,int ultimoAzul, int noUsado){
+	int auxR=n;
+	int auxA=n;
+	int auxN=n;
+	int mejorSol;
 	if(i==n){
-		termino =true;
-		return res;
+		return noUsado;
 	}else{
+		//caso ROJO
 		if(rojoUsado==false){
-			rojoUsado=true;
-			ultimoRojo=arr[i];
-			res--;
-			bt_recur_acot(arr,n,i+1,rojoUsado,ultimoRojo,azulUsado,ultimoAzul,res,termino);
-			if(termino){
-				return res;
-			}
+			auxR=bt_recur_acot(arr,n,i+1,true,arr[i],azulUsado,ultimoAzul,noUsado);
 		}else{
-			//ya hay un ultimoROjo
 			if(ultimoRojo<arr[i]){
-				ultimoRojo=arr[i];
-				res--;
-				bt_recur_acot(arr,n,i+1,rojoUsado,ultimoRojo,azulUsado,ultimoAzul,res,termino);
-				if(termino){
-					return res;
-				}
+			//puede ser rojo
+				auxR=bt_recur_acot(arr,n,i+1,rojoUsado,arr[i],azulUsado,ultimoAzul,noUsado);
 			}else{
-				//no puede ser rojo
-				bt_recur_acot(arr,n,i+1,rojoUsado,ultimoRojo,azulUsado,ultimoAzul,res,termino);
-				if(termino){
-					return res;
-				}
+				//NO puede ser rojo
 			}
 		}
+
+		//Caso Azul
 		if(azulUsado==false){
-			azulUsado=true;
-			ultimoAzul=arr[i];
-			res--;
-			bt_recur_acot(arr,n,i+1,rojoUsado,ultimoRojo,azulUsado,ultimoAzul,res,termino);
-			if(termino){
-				return res;
-			}
+			auxA=bt_recur_acot(arr,n,i+1,rojoUsado,ultimoRojo,true,arr[i],noUsado);
 		}else{
+			//veo si puede ser azul
 			if(ultimoAzul>arr[i]){
-				ultimoAzul=arr[i];
-				res--;
-				bt_recur_acot(arr,n,i+1,rojoUsado,ultimoRojo,azulUsado,ultimoAzul,res,termino);
-				if(termino){
-					return res;
-				}
+				//puede
+				auxA=bt_recur_acot(arr,n,i+1,rojoUsado,ultimoRojo,azulUsado,arr[i],noUsado);
 			}else{
-				//no puede ser azul
-				bt_recur_acot(arr,n,i+1,rojoUsado,ultimoRojo,azulUsado,ultimoAzul,res,termino);
-					if(termino){
-						return res;
-				}
+				//No puede ser AZUL
 			}
 		}
+
+		//Caso Nada
+		auxN=bt_recur_acot(arr,n,i+1,rojoUsado,ultimoRojo,azulUsado,ultimoAzul,noUsado+1);
+
+		mejorSol = min3(auxR,auxA,auxN);
+
 	}
 
 }
 
 int backtracking_cota (vector<int> arr, int n){
 	bool bfalse=false;
-	int res=n;
-	return bt_recur_acot(arr,n,0,false,0,false,0,res,bfalse);
+	// int res=n;
+	return bt_recur_acot(arr,n,0,false,0,false,0,0);
 }	

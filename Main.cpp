@@ -30,12 +30,14 @@ int main(int argc, char const *argv[]){
                 mostrarVector(llenarR);
                 cout<<"AZUL: ";
                 mostrarVector(llenarA);
-        }else if(ejercicio==3){
+        }else if(ejercicio==2){
                 cout<<"ejer ACOT"<<endl;
                 cout<<"SALIDA: "<<endl;
                 cout<<backtracking_cota(dataInt,dataInt.size())<<endl;
                 // cout<<"dinamica cuesta pa, mejor mira backtracking"<<endl;                
 
+        }else if(ejercicio==3){
+                cout<<"Dinamicaaaaaaaa"<<endl;
         }else{
 
                 cout<<"no existe ese ejercicio"<<endl;
