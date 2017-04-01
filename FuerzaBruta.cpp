@@ -64,7 +64,7 @@ bool esSolucion(vector<int > crec, vector<int> dec){
     return esCrec(crec) && esDec(dec);
 }
 
- void ejercicio_uno(vector<tupNumero> arr, int n)
+ void fuerzaBruta(vector<tupNumero> arr, int n)
 {
     int mejorNumerosOut=n;
     vector<int> mejorCrec;
