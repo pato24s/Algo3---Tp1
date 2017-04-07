@@ -1,4 +1,5 @@
 #include "Ejercicio1.cpp"
+#include "Ejercicio3.cpp"
 #include <time.h>
 #include <sys/time.h>
 using namespace std;
@@ -16,6 +17,7 @@ double timeval_diff(struct timeval *a, struct timeval *b)
 int main(int argc, char const *argv[]){
 
 
+        
         struct timeval t_ini, t_fin;
         double secs;
 
@@ -49,14 +51,14 @@ int main(int argc, char const *argv[]){
                 cout<<sal<<endl; 
                 secs = timeval_diff(&t_fin, &t_ini);
 
-                // cout<<"tardo: "<<endl;
+                cout<<"tardo: "<<endl;
                 cout<<secs<<endl;
                 
-                // cout<<"Explicación:"<<endl;
-                // cout<<"ROJO: ";
-                // mostrarVector(llenarR);
-                // cout<<"AZUL: ";
-                // mostrarVector(llenarA);
+                cout<<"Explicación:"<<endl;
+                cout<<"ROJO: ";
+                mostrarVector(llenarR);
+                cout<<"AZUL: ";
+                mostrarVector(llenarA);
         }else if(ejercicio==2){
                 // cout<<"ejer ACOT"<<endl;
                 // cout<<"SALIDA: "<<endl;
@@ -66,7 +68,7 @@ int main(int argc, char const *argv[]){
                 int salCool=backtracking_cota(dataInt,dataInt.size());
                 gettimeofday(&t_fin, NULL); 
                 secs = timeval_diff(&t_fin, &t_ini);
-                // cout<<"sal: "<<salCool<<endl;
+                cout<<"sal: "<<salCool<<endl;
                 // cout<<"tardo: "<<endl;
                 cout<<secs<<endl;
                 // cout<<"dinamica cuesta pa, mejor mira backtracking"<<endl;                
@@ -79,9 +81,20 @@ int main(int argc, char const *argv[]){
         	gettimeofday(&t_fin, NULL); 
 
         	secs = timeval_diff(&t_fin, &t_ini);
-        	// cout<<"SALIDA: "<<salFb<<endl;
+        	cout<<"SALIDA: "<<salFb<<endl;
         	cout<<secs<<endl;
 
+        }else if(ejercicio==3){
+        
+            int pd=programacionDinamica(dataInt,dataInt.size());
+            cout<<"pd"<<endl;
+            cout<<pd<<endl;
+
+            cout<<"btc"<<endl;
+            int bt=backtracking_cota(dataInt,dataInt.size());
+            cout<<bt<<endl;
+            bool aux=bt==pd;
+            cout<<"sol: "<<aux<<endl;
         }else{
 
                 cout<<"no existe ese ejercicio"<<endl;
