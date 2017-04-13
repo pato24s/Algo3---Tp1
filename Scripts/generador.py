@@ -7,7 +7,7 @@ def main():
 
 
     howMany = int(input('How many numbers would you like to generate?: '))
-    cantidadSalidas = int(input('cuantas salidas de ese numero queres?: '))
+    cantidadSalidas = 30
     for i in range(1,cantidadSalidas+1):
     	numbers = []
     	infile = open ('../Entradas/'+str(howMany)+'/inRandom'+str(howMany)+'_'+str(i)+'.txt', 'w')

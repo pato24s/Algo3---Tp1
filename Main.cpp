@@ -2,6 +2,7 @@
 #include "Ejercicio3.cpp"
 #include <time.h>
 #include <sys/time.h>
+#include <chrono>
 using namespace std;
 
 
@@ -10,8 +11,8 @@ using namespace std;
 double timeval_diff(struct timeval *a, struct timeval *b)
 {
   return
-    (double)(a->tv_sec + (double)a->tv_usec/1000000) -
-    (double)(b->tv_sec + (double)b->tv_usec/1000000);
+    (double)(a->tv_sec + (double)a->tv_usec)/1000000 -
+    (double)(b->tv_sec + (double)b->tv_usec)/1000000;
 }
 
 int main(int argc, char const *argv[]){
@@ -45,56 +46,89 @@ int main(int argc, char const *argv[]){
                 vector<int> llenarA;
                 // cout<<"SALIDA: "<<endl;
 
-                gettimeofday(&t_ini, NULL);
-                int sal=backtracking(data,data.size(),llenarR,llenarA);
-                gettimeofday(&t_fin, NULL);
-                cout<<sal<<endl; 
-                secs = timeval_diff(&t_fin, &t_ini);
+                // gettimeofday(&t_ini, NULL);
+                auto start = chrono::high_resolution_clock::now();
+                int sal=backtracking(data,data.size());
+                auto finish = chrono::high_resolution_clock::now();
 
-                cout<<"tardo: "<<endl;
-                cout<<secs<<endl;
+                float milli = chrono::duration_cast<chrono::milliseconds>(finish-start).count();
+                float secs = milli/1000;
+                cout << secs;
+                // gettimeofday(&t_fin, NULL);
+                // cout<<sal<<endl; 
+                // secs = timeval_diff(&t_fin, &t_ini);
+
+                // cout<<"tardo: "<<endl;
+                // cout<<secs<<endl;
                 
-                cout<<"Explicación:"<<endl;
-                cout<<"ROJO: ";
-                mostrarVector(llenarR);
-                cout<<"AZUL: ";
-                mostrarVector(llenarA);
+                // cout<<"Explicación:"<<endl;
+                // cout<<"ROJO: ";
+                // mostrarVector(llenarR);
+                // cout<<"AZUL: ";
+                // mostrarVector(llenarA);
         }else if(ejercicio==2){
                 // cout<<"ejer ACOT"<<endl;
                 // cout<<"SALIDA: "<<endl;
                 
                 gettimeofday(&t_ini, NULL);
 
+                            auto start = chrono::high_resolution_clock::now();
+
                 int salCool=backtracking_cota(dataInt,dataInt.size());
+                            auto finish = chrono::high_resolution_clock::now();
+                            float milli = chrono::duration_cast<chrono::milliseconds>(finish-start).count();
+
+            float segs = milli/1000;
+
+
                 gettimeofday(&t_fin, NULL); 
                 secs = timeval_diff(&t_fin, &t_ini);
-                cout<<"sal: "<<salCool<<endl;
+                // cout<<"sal: "<<salCool<<endl;
                 // cout<<"tardo: "<<endl;
-                cout<<secs<<endl;
+                cout<<segs;
                 // cout<<"dinamica cuesta pa, mejor mira backtracking"<<endl;                
 
         }else if(ejercicio==0){
         	gettimeofday(&t_ini, NULL);
+                            auto start = chrono::high_resolution_clock::now();
 
             int salFb= fuerzaBruta(data,data.size());
         	// cout<<salFb<<endl;
+                                        auto finish =  chrono::high_resolution_clock::now();
+                            float milli = chrono::duration_cast<chrono::milliseconds>(finish-start).count();
+
         	gettimeofday(&t_fin, NULL); 
 
         	secs = timeval_diff(&t_fin, &t_ini);
-        	cout<<"SALIDA: "<<salFb<<endl;
-        	cout<<secs<<endl;
+                        float segs = milli/1000;
+
+        	// cout<<"SALIDA: "<<salFb<<endl;
+        	cout<<segs;
 
         }else if(ejercicio==3){
         
-            int pd=programacionDinamica(dataInt,dataInt.size());
-            cout<<"pd"<<endl;
-            cout<<pd<<endl;
+            // gettimeofday(&t_ini, NULL);
+            auto start = chrono::high_resolution_clock::now();
+            int pd=programacionDinamica(dataInt);
+            auto finish = chrono::high_resolution_clock::now();
 
-            cout<<"btc"<<endl;
-            int bt=backtracking_cota(dataInt,dataInt.size());
-            cout<<bt<<endl;
-            bool aux=bt==pd;
-            cout<<"sol: "<<aux<<endl;
+            float milli = chrono::duration_cast<chrono::milliseconds>(finish-start).count();
+
+            float secs = milli/1000;
+
+            cout << secs;
+
+            // gettimeofday(&t_fin, NULL); 
+            // cout<<secs<<endl;
+
+            // cout<<"pd"<<endl;
+            // cout<<pd<<endl;
+
+            // cout<<"btc"<<endl;
+            // int bt=backtracking_cota(dataInt,dataInt.size());
+            // cout<<bt<<endl;
+            // bool aux=bt==pd;
+            // cout<<"sol: "<<aux<<endl;
         }else{
 
                 cout<<"no existe ese ejercicio"<<endl;

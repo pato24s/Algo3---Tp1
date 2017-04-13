@@ -54,7 +54,7 @@ bool esSolucion(vector<int >& crec, vector<int>& dec){
     return esCrec(crec) && esDec(dec);
 }
 
-int estudiarCaso(vector<tupNumero>& v,vector<int> &llenarR, vector<int> &llenarA){
+int estudiarCaso(vector<tupNumero>& v){
 	int sinUsar= v.size();
 	vector<int> rojos;
 	vector<int> azules;	
@@ -69,8 +69,8 @@ int estudiarCaso(vector<tupNumero>& v,vector<int> &llenarR, vector<int> &llenarA
 	}
 	if(esSolucion(rojos,azules)){
 		sinUsar= sinUsar-rojos.size()-azules.size();
-		llenarR=rojos;
-		llenarA=azules;
+		// llenarR=rojos;
+		// llenarA=azules;
 	}
 	return sinUsar;
 }
@@ -93,17 +93,17 @@ int min3(int a, int b, int c){
 
 
 
-int bt_recur(vector<tupNumero> &arr, int n, int i, vector<tupNumero> &v, vector<int> &optimoR, vector<int> &optimoA){
+int bt_recur(vector<tupNumero> &arr, int n, int i, vector<tupNumero> &v){
 	vector<tupNumero> caminoRojo=v;
 	vector<tupNumero> caminoAzul=v;
 
-	vector<int> posibleRojo1;
-	vector<int> posibleRojo2;
-	vector<int> posibleRojo3;
+	// vector<int> posibleRojo1;
+	// vector<int> posibleRojo2;
+	// vector<int> posibleRojo3;
 
-	vector<int> posibleAzul1;
-	vector<int> posibleAzul2;
-	vector<int> posibleAzul3;
+	// vector<int> posibleAzul1;
+	// vector<int> posibleAzul2;
+	// vector<int> posibleAzul3;
 
 
 	int posible1;
@@ -133,54 +133,54 @@ int bt_recur(vector<tupNumero> &arr, int n, int i, vector<tupNumero> &v, vector<
 		// cout<<"tam v: "<<v.size()<<endl;
 		
 
-		posible1 = estudiarCaso(v,posibleRojo1,posibleAzul1);
-		posible2 = estudiarCaso(caminoRojo,posibleRojo2,posibleAzul2);
-		posible3 = estudiarCaso(caminoAzul,posibleRojo3,posibleAzul3);
+		posible1 = estudiarCaso(v);
+		posible2 = estudiarCaso(caminoRojo);
+		posible3 = estudiarCaso(caminoAzul);
 
 
 		int minimoHastaAca = min3(posible3,posible2,posible1);
-		if(minimoHastaAca==posible1){
-			optimoR=posibleRojo1;
-			optimoA=posibleAzul1;
-		}else if(minimoHastaAca==posible2){
-			optimoR=posibleRojo2;
-			optimoA=posibleAzul2;
-		}else{
-			optimoR=posibleRojo3;
-			optimoA=posibleAzul3;
-		}
+		// if(minimoHastaAca==posible1){
+		// 	optimoR=posibleRojo1;
+		// 	optimoA=posibleAzul1;
+		// }else if(minimoHastaAca==posible2){
+		// 	optimoR=posibleRojo2;
+		// 	optimoA=posibleAzul2;
+		// }else{
+		// 	optimoR=posibleRojo3;
+		// 	optimoA=posibleAzul3;
+		// }
 		// mostrarVector(optimoA);
 		return minimoHastaAca;
 	}else{
 	
 
-		sol1= bt_recur(arr,n,i,v,posibleRojo1,posibleAzul1);
-		sol2= bt_recur(arr,n,i,caminoRojo,posibleRojo2,posibleAzul2);
-		sol3= bt_recur(arr,n,i,caminoAzul,posibleRojo3,posibleAzul3);
+		sol1= bt_recur(arr,n,i,v);
+		sol2= bt_recur(arr,n,i,caminoRojo);
+		sol3= bt_recur(arr,n,i,caminoAzul);
 
 		//si no flasheo aca llego cuando termine todas las recurs
 
 		int minimoOptimo =min3(sol1,sol2,sol3);
-		if(minimoOptimo==sol1){
-			optimoR=posibleRojo1;
-			optimoA=posibleAzul1;
-		}else if(minimoOptimo==sol2){
-			optimoR=posibleRojo2;
-			optimoA=posibleAzul2;
-		}else{
-			optimoR=posibleRojo3;
-			optimoA=posibleAzul3;
-		}
+		// if(minimoOptimo==sol1){
+		// 	optimoR=posibleRojo1;
+		// 	optimoA=posibleAzul1;
+		// }else if(minimoOptimo==sol2){
+		// 	optimoR=posibleRojo2;
+		// 	optimoA=posibleAzul2;
+		// }else{
+		// 	optimoR=posibleRojo3;
+		// 	optimoA=posibleAzul3;
+		// }
 		return minimoOptimo;
 	}
 
 }
 
-int backtracking (vector<tupNumero> &arr, int n,vector<int> &optimoR, vector<int> &optimoA){
+int backtracking (vector<tupNumero> &arr, int n){
 	vector<tupNumero> v;
 	int i=0;
 
-	return bt_recur(arr,n,i,v,optimoR,optimoA);
+	return bt_recur(arr,n,i,v);
 }
 
 int bt_recur_acot(vector<int> &arr,int n, int i, bool rojoUsado,int ultimoRojo, bool azulUsado,int ultimoAzul, int noUsado){
