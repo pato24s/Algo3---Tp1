@@ -1,8 +1,7 @@
 # make clean 
 # make
 
-n=40
-ejer=3
+ejer=2
 # for (( j =6; j<= 15; j++)); do
 
 # 	for (( i = 1; i <= 30; i++ )); do
@@ -15,23 +14,23 @@ ejer=3
 # 	done
 # done
 
-for (( i = 100; i <= 500; i+=50 )); do
-	if((i != 500)); then
-		printf '%s' "n=$i,">>../DataExp/ejer_${ejer}salida100a500.csv
+for (( i = 15; i <= 25; i+=5 )); do
+	if((i != 25)); then
+		printf '%s' "$i,">>../DataExp/ejer_${ejer}salida15a25Creciente.csv
 	else
-		printf '%s\n' "n=$i">>../DataExp/ejer_${ejer}salida100a500.csv
+		printf '%s\n' "$i">>../DataExp/ejer_${ejer}salida15a25Creciente.csv
 	fi
 done
 
 #Ya imprimi titulos
 
-for (( i = 1; i <= 30; i++ )); do
-	for (( j =100; j<= 500; j+=50)); do
-		../main ../Entradas/${j}/inRandom${j}_${i}.txt ${ejer} >>../DataExp/ejer_${ejer}salida100a500.csv
-		if((j != 500)); then
-		printf '%s' ",">>../DataExp/ejer_${ejer}salida100a500.csv
+for (( i = 1; i <= 20; i++ )); do
+	for (( j =15; j<= 25; j+=5)); do
+		../main ../Entradas/${j}/inCreciente${j}.txt ${ejer} >>../DataExp/ejer_${ejer}salida15a25Creciente.csv
+		if((j != 25)); then
+		printf '%s' ",">>../DataExp/ejer_${ejer}salida15a25Creciente.csv
 		else
-		printf '%s\n' "">>../DataExp/ejer_${ejer}salida100a500.csv
+		printf '%s\n' "">>../DataExp/ejer_${ejer}salida15a25Creciente.csv
 		fi
 	done
 	printf '%s\n'"listo fila $i"
